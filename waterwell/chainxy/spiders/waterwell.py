@@ -1,17 +1,31 @@
 # from __future__ import unicode_literals
 import scrapy
+
 import json
+
 import os
+
 import scrapy
+
 from scrapy.spiders import Spider
+
 from scrapy.http import FormRequest
+
 from scrapy.http import Request
+
 from chainxy.items import ChainItem
+
 from lxml import etree
+
 from selenium import webdriver
+
 from lxml import html
+
 import time
+
 import pdb
+
+
 
 class waterwell(scrapy.Spider):
 
