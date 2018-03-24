@@ -8,6 +8,10 @@
 from scrapy.item import Item, Field
 
 class ChainItem(Item):
+	owner_contractor = Field()
+	name = Field()
+	address = Field()
+	telephone = Field()
 	reference_number = Field()
 	driving_dircetion_to_well = Field()
 	date_completed = Field()
@@ -62,3 +66,6 @@ class ChainItem(Item):
 	aquifer_elevation = Field()
 	utm_easting = Field()
 	utm_northing = Field()
+	top = Field()
+	bottom = Field()
+	formation = Field()

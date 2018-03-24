@@ -106,6 +106,10 @@ class wize(scrapy.Spider):
 
 			item['date_well_completed'] = self.validate(''.join(loc.xpath('.//td[2]//text()').extract()))
 
+			item['date_completed'] = self.validate(''.join(loc.xpath('.//td[2]//text()').extract()))
+
+			item['remarks'] = self.validate(''.join(loc.xpath('.//td[6]//text()').extract()))
+
 			# go into well detail page.
 
 			yield scrapy.Request(url=url, callback=self.parse_detail, meta={'item': item})

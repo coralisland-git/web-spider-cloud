@@ -92,6 +92,14 @@ class waterwell(scrapy.Spider):
 			
 			item = ChainItem()
 
+			item['owner_contractor'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnType"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="Label89"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="Label90"]//text()')))
+			
+			item['name'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnName"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillName"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblOperName"]//text()')))
+			
+			item['address'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnAddr"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillAddr"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblOperLic"]//text()')))
+			
+			item['telephone'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnPhone"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillPhone"]//text()'))) + '-' + ' '
+
 			item['reference_number'] = self.validate(''.join(tree.xpath('//span[@id="lblRefNum"]//text()')))
 
 			item['driving_dircetion_to_well'] = self.validate(''.join(tree.xpath('//span[@id="lblDriving"]//text()')))
@@ -199,6 +207,28 @@ class waterwell(scrapy.Spider):
 			item['utm_easting'] = self.validate(''.join(tree.xpath('//span[@id="lblUTMEast"]//text()')))
 
 			item['utm_northing'] = self.validate(''.join(tree.xpath('//span[@id="lblUTMNorth"]//text()')))
+
+			well_log_table = tree.xpath('//table[@rules="all"]//tr')[1:]
+
+			top = ''
+
+			bottom = ''
+
+			formation = ''
+
+			for well_log in well_log_table:
+
+				top += self.validate(''.join(well_log.xpath('.//td[1]/text()'))) + '-'
+
+				bottom += self.validate(''.join(well_log.xpath('.//td[2]/text()'))) + '-'
+
+				formation += self.validate(''.join(well_log.xpath('.//td[3]/text()'))) + '-'
+
+			item['top'] = top[:-1]
+
+			item['bottom'] = bottom[:-1]
+
+			item['formation'] = formation[:-1]
 
 			yield item
 			
