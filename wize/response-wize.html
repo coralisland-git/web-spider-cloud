@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<style type="text/css"> 
+ .hid 	{ font-size: 7pt;
+	border-color: white;	
+	border-style: solid;	
+	border-width: medium;	
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;}
+ table 	{ font-size: 7pt;
+	background: #FFF;
+	border-color: black;
+	border-style: solid;
+	border-width: medium;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+ }
+ input, text 	{ font-size: 7pt;} 
+ td {	border-height: 1px; border-width: 1px; }
+ body {	background: #66a79b; }
+ select, option	{ font-size: 7pt;}
+.text1 { background: #dddddd;	
+ color: #000000; font-size:12pt; } 	
+.drk2 { background: #dddddd; }
+</style>
+<script type="text/javascript" src="javascript/functions.js"></script>
+<script type="text/javascript" src="javascript/checkdate.js"></script>
+
+<TITLE>Driller DB</TITLE>
+<body><center>
+<form name="form1" method="post" onSubmit="return validate(form1)" action="save.php">
+<input type="hidden" value="update" name="control">
+<font size="+1">STATE OF ARKANSAS<BR>REPORT ON WATER WELL CONSTRUCTION & PUMP INSTALLATION</font><BR>
+<input type="button" value="MAIN MENU" onClick="window.location='index.php'">
+<input type="reset" value="RESET">
+<input type="submit" value="SUBMIT">
+<table BORDERCOLOR="#000000" border="3">
+<tr><td colspan="3">
+<table width="100%" border="0">
+<tR><td valign="top" rowspan="4"><font size="+3"><b>A</b></font></td>
+<td align="left">1. Contractor Name & Number: </td>
+
+<td>1106</td><td>JOHN BOREING WATER WELLS, INC.</td>
+<tr><td>2. Driller Name & Number: </td>
+<td>2122</td><td>JOHN BOREING </td>
+<tr><td>3.&nbsp;Pump&nbsp;Installer&nbsp;Name&nbsp&&nbsp;Number:</td>
+<td>4219</td><td>JOHN BOREING </td>
+
+</td></tr><td colspan="5">4. Date Well Completed:
+
+<font class="text1" >06/30/2011</font>
+
+&nbsp; &nbsp; &nbsp; &nbsp;
+Replacement<input type=hidden name="well_status" value="Replacement"> 
+</td></tr>
+<tr><td colspan="2">5. COUNTY : &nbsp; 
+
+<input type="hidden" value="001" name="county_cd"> 
+ARKANSAS ( 001 )</select></td>
+<td colspan="2">6 FRACTION 
+<font size="+1"></font>
+&frac14; of <font size="+1"></font>
+&frac14; 
+<BR>7 SECTION: 
+<font class="text1" ></font>
+</td> </td>
+<td colspan="2">8&nbsp;TOWNSHIP
+<font class="text1" ></font>
+
+<BR>9 RANGE
+<font class="text1" ></font>
+</td></tr> <tr><td colspan='5'>11. LONGITUDE
+<font class="text1" >33-22-00</font>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 12. LATITUDE
+<font class="text1" >93-55-25</font>
+</tr></table>
+</td></tr><tr><td valign="top" align="center">
+
+<table border="1" width="300"><TR><TD rowspan="2">
+<table class="hid" align="left"><tr><td><font size="+3"><b>B</b></font></td></tr></table>
+DESCRIPTION<BR>OF FORMATION </td> 
+<td colspan="2" align="center">DEPTHS IN FEET</td><td rowspan="2" align="left">WATER BEARING</td>
+<td rowspan="2" align="left">IF YES..<BR>DEPTH</tr>
+<tr><td align="right">FROM</td><td align="left">TO</td></tr>
+ 
+<tr><td><font size="+1">CLAY</font></td>
+</td><td align="right">
+<font class="text1" >0</font>
+</td><td>
+<font class="text1" >17</font>
+</td><td>
+<font size="+1">No</font> 
+</td><td> 
+<font class="text1" >0</font>
+</td></tr>
+<tr><td><font size="+1">NG</font></td>
+</td><td align="right">
+<font class="text1" >0</font>
+</td><td>
+<font class="text1" >0</font>
+</td><td>
+<font size="+1">No</font> 
+</td><td> 
+<font class="text1" >0</font>
+</td></tr>
+<tr><td><font size="+1">SAND / COARSE SAND</font></td>
+</td><td align="right">
+<font class="text1" >17</font>
+</td><td>
+<font class="text1" >40</font>
+</td><td>
+<font size="+1">Yes</font> 
+</td><td> 
+<font class="text1" >17</font>
+</td></tr>
+<tr><td><font size="+1">SHALE</font></td>
+</td><td align="right">
+<font class="text1" >40</font>
+</td><td>
+<font class="text1" >43</font>
+</td><td>
+<font size="+1">No</font> 
+</td><td> 
+<font class="text1" >0</font>
+</td></tr>
+<tr><td><font size="+1">SAND / COARSE SAND</font></td>
+</td><td align="right">
+<font class="text1" >43</font>
+</td><td>
+<font class="text1" >47</font>
+</td><td>
+<font size="+1">Yes</font> 
+</td><td> 
+<font class="text1" >0</font>
+</td></tr>
+
+
+<tr><td colspan="5">2. TOTAL DEPTH OF WELL &nbsp; 
+<font class="text1" >47</font>
+<tr><td colspan="5">3. STATIC WATER LEVEL &nbsp; 
+<font class="text1" >17</font>
+Ft. below land surface </td></tr>
+<tr><td colspan="5">4. YIELD &nbsp; 
+<font class="text1" >40</font>
+gallons per
+<font class="text1" >MIN</font>
+</td></tr>
+
+<tr><td colspan="5">5.&nbsp;DIAMETER&nbsp;OF&nbsp;BORE&nbsp;HOLE&nbsp;
+
+<font class="text1" >36</font>
+ IN </td></tr>
+<tr><td colspan="5"><font size="+3"><B>C</b></font>&nbsp;&nbsp;&nbsp; &nbsp; PUMP&nbsp;REPORT</td></tr><tr><td colspan="5">1&nbsp;TYPE&nbsp;PUMP&nbsp;&nbsp;&nbsp;&nbsp;
+<font class="text1" ></font>
+
+</td></tr><tr><td colspan="5">2&nbsp;SETTING DEPTH 
+<font class="text1" >45</font>
+FEET </td></tr> 
+<tr><td colspan="5">3&nbsp;BRAND NAME AND SERIAL NUMBERS:<BR>
+<font class="text1" >GOULD</font>
+</td></tr><tr><td colspan="5">4&nbsp;RATED CAPACITY 
+<font class="text1" >10</font>
+ 
+gallons per minute </td></tr> 
+<tr><td colspan="5">5&nbsp;TYPE LUBRICATION 
+<font class="text1" ></font>
+ 
+</td></tr><tr><td colspan="5">6&nbsp;DROP PIPE OR COLUMN PIPE SIZE
+<font class="text1" >1 IN</font>
+ 
+</td></tr><tr><td colspan="5">7&nbsp;WIRE SIZE
+<font class="text1" >12 GAUGE</font>
+ 
+</td></tr><tr><td colspan="5">8&nbsp;PRESSURE TANK:<BR>
+SIZE: <font class="text1" >WM 6</font>
+ 
+MAKE: <font class="text1" ></font>
+ 
+MODEL: <font class="text1" ></font>
+ 
+ </td></tr><tr><td colspan="5" nowrap>9&nbsp;DATE OF INSTALLATION OR REPAIR
+
+<font class="text1" >06/30/2011</font>
+ 
+</td></tr><tr><td colspan="5">
+10&nbsp;Is there an abandoned water well on the property?<BR>
+<font class="text1" ></font>
+</td></tr></table>
+</td><td valign="top"><table border="2" width="430">
+<TR><td valign="top">
+<table class="hid" align="left"><tr><td>
+
+</td></tr>
+<tr><td>
+CASING&nbsp;&nbsp;&nbsp;FROM&nbsp;<font class="text1" >0</font>
+TO&nbsp;<font class="text1" >0</font>
+W/&nbsp;<font class="text1" >0</font>
+Inner Diameter<br>
+CASING&nbsp;&nbsp;&nbsp;FROM&nbsp;<font class="text1" >0</font>
+TO&nbsp;<font class="text1" >47</font>
+W/&nbsp;<font class="text1" >30</font>
+Inner Diameter<br>
+TYPE CASING&nbsp;&nbsp;&nbsp;
+<font class="text1" >CONCRETE</font>
+</td></tr><tr><td>
+<table class="hid"><tr><td colspan="4">
+3. SCREEN</td></tr>
+<tr><td>TYPE:</td><td>
+</td><td>DIA</td><td>
+<font class="text1" ></font>
+</td><td>SLOT/GA</td><td>
+<font class="text1" ></font>
+</td></tr><TR><TD>
+SET&nbsp;FROM</td><td>
+<font class="text1" ></font>
+FT</td><td>TO</td><td>
+<font class="text1" ></font>
+FT</td></tr>
+<tr><td>TYPE:</td><td>
+</td><td>DIA</td><td>
+<font class="text1" ></font>
+</td><td>SLOT/GA</td><td>
+<font class="text1" ></font>
+</td></tr><TR><TD>
+SET&nbsp;FROM</td><td>
+<font class="text1" ></font>
+FT</td><td>TO</td><td>
+<font class="text1" ></font>
+FT</td></tr>
+</table>
+ </td></tr><tr><td>
+4. GRAVEL&nbsp;PACK&nbsp;&nbsp;&nbsp;FROM:&nbsp;
+<font class="text1" ></font>
+FT&nbsp;TO:&nbsp;
+<font class="text1" ></font>
+FT </td></tr>
+<tr><td>5. BACK FILLED WITH: 
+<font class="text1" ></font>
+<BR>FROM:&nbsp;
+<font class="text1" ></font>
+FT&nbsp;TO:&nbsp;
+<font class="text1" ></font>
+FT </td></tr><tr><td>
+6. SEALED WITH:
+<font class="text1" ></font>
+<BR>
+FROM:&nbsp; 
+<font class="text1" ></font>
+FT&nbsp;TO:&nbsp;
+<font class="text1" ></font>
+FT <BR>
+ 
+
+</td></tr><tr><td>
+7. DISINFECTED WITH:
+<font class="text1" >CHLORINE TABLETS</font>
+
+</td></tr><tr><td>
+8. USE OF WELL:<BR>
+DOMESTIC 
+<BR>OTHER 
+<font class="text1" >	</font>
+</td></tr><tr><td>
+&nbsp; &nbsp; A/C HEATPUMP TYPE WELLS <BR>
+<table align="center" class="hid"><TR>
+
+
+<td></td></tr></table>
+</td></tr><tr><td>
+(For A/C only)<font size="-3">Will system also be used for purposes other than Heating and Air Conditioning?</font><BR>
+&nbsp; &nbsp; If yes, name use: 
+<font class="text1" ></font>
+
+</td></tr><tr><td>
+(For A/C open-loop only)
+<font size="-3">Into what medium is water returned?</font>
+
+<font class="text1" ></font>
+</td></tr><tr><td>11. REMARKS<BR>
+<font class="text1" ></font>
+</td></tr><tr><td>
+<table class="hid" width="100%"><tR><TD align="left">
+12. SIGNED</td><td align="right">DATE</td></tr></table>
+<BR><BR><BR><BR>
+</table>
