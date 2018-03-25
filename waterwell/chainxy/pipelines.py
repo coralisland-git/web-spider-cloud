@@ -41,8 +41,6 @@ class ChainxyPipeline(object):
 
     def spider_opened(self, spider):
 
-        file = open('%s_%s.xls' % (spider.name, datetime.datetime.strftime(datetime.datetime.now(),'%Y%m%d')), 'w+b')
-
         workbook=xlsxwriter.Workbook('%s_%s.xlsx' % (spider.name, datetime.datetime.strftime(datetime.datetime.now(),'%Y%m%d')))
 
         self.file = workbook

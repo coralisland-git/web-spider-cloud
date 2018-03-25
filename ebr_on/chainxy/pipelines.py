@@ -47,22 +47,13 @@ class ChainxyPipeline(object):
 
         self.file.main_table = workbook.add_worksheet('Main Table')
 
-        self.file.main_table_headers = ['well_id', 'date_completed', 'well_depth', 'well_yield', 'use_type', 'remarks']
+        self.file.main_table_headers = ['ministry_reference_number', 'ebr_registry_number', 'company_name', 'instrument_type', 'notice_type', 'notice_date', 'proposal_date', 'proposal_address', 'related_locations']
 
         for index, header in enumerate(self.file.main_table_headers):
 
             self.file.main_table.write(0, index, header)
-            
 
-        self.file.table_a = workbook.add_worksheet('Table A')
-
-        self.file.table_a_headers = ['well_id', 'contractor_name', 'contractor_number', 'driller_name', 'driller_number', 'pump_installer_name', 'pump_installer_number', 'date_well_completed', 'country', 'fraction', 'section', 'township', 'range', 'longitude', 'latitude']
-
-        for index, header in enumerate(self.file.table_a_headers):
-
-            self.file.table_a.write(0, index, header)
-
-
+   
     def spider_closed(self, spider):
 
         self.file.close()
@@ -75,10 +66,6 @@ class ChainxyPipeline(object):
             if key in self.file.main_table_headers:
 
                 self.file.main_table.write(self.count, self.file.main_table_headers.index(key) , value)
-
-            if key in self.file.table_a_headers:
-
-                self.file.table_a.write(self.count, self.file.table_a_headers.index(key) , value)
 
         self.count += 1
 
