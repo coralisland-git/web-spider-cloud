@@ -91,7 +91,7 @@ class ChainxyPipeline(object):
 
                 self.file.well_details_sheet.write(self.count, self.file.well_details_sheet_headers.index(key) , value)
 
-            if key in self.file.owner_contractor_sheet_headers:
+            if key in self.file.owner_contractor_sheet_headers and value != '' and key != 'reference_number':
 
                 temp = value.split('-')
 
@@ -107,7 +107,7 @@ class ChainxyPipeline(object):
 
                     local_count += 1
 
-            if key in self.file.well_log_sheet_headers:
+            if key in self.file.well_log_sheet_headers and value != '' and key != 'reference_number':
 
                 temp = value.split('-')
 

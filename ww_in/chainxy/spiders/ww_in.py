@@ -27,9 +27,9 @@ import pdb
 
 
 
-class waterwell(scrapy.Spider):
+class ww_in(scrapy.Spider):
 
-	name = 'waterwell'
+	name = 'ww_in'
 
 	domain = 'https://secure.in.gov/'
 

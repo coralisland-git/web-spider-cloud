@@ -21,9 +21,9 @@ from lxml import html
 
 import pdb
 
-class wize(scrapy.Spider):
+class ww_ar(scrapy.Spider):
 
-	name = 'wize'
+	name = 'ww_ar'
 
 	domain = 'https://wise.er.usgs.gov/driller_db/'
 
