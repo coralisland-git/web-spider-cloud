@@ -15,11 +15,16 @@ from scrapy.http import Request
 
 from chainxy.items import ChainItem
 
+from selenium import webdriver
+
+
 from lxml import etree
 
 from lxml import html
 
-import textract
+import time
+
+# import textract
 
 import pdb
 
@@ -46,27 +51,37 @@ class eca_on(scrapy.Spider):
 	}
 
 	def __init__(self):
-		pass
-	
-	# start scraper
+
+		# load selenium driver
+
+		self.driver = webdriver.Chrome("./chromedriver")
 
 	def start_requests(self):
 
-		init_url  = 'https://www.accessenvironment.ene.gov.on.ca'
+		init_url  = 'http://www.gisapplication.lrc.gov.on.ca/AccessEnvironment/IndexAccEnv.html?viewer=AccessEnvironment.AE&locale=en-US'
 
-		formdata = {
-
-			"username":"public",
-
-			"username1":"public"
-		}
-
-		# sign in with credentials into website.
 		yield scrapy.Request(url=init_url, callback=self.parse)
 
 		# yield scrapy.FormRequest(url=init_url, callback=self.parse, formdata=formdata, headers=self.header, method="post")
 
 	def parse(self, response):
+
+		self.driver.get("http://www.gisapplication.lrc.gov.on.ca/AccessEnvironment/IndexAccEnv.html?viewer=AccessEnvironment.AE&locale=en-US")
+
+		time.sleep(60)
+
+		self.driver.find_element_by_class_name('flyout-menu-active-tool').click()
+#
+		self.driver.find_elements_by_xpath('//ul[@class="toolbar-parent"]//button[@class="toolbar-item"]')[1].click()
+
+		time.sleep(10)
+
+		pdb.set_trace()
+
+
+		self.driver.find_element_by_id('mstr_cphUserItems_ddlQSearch').send_keys('County')
+
+		self.driver.find_element_by_id('mstr_cphUserItems_btnSearchGo').click()
 
 
 		pdf = 'https://www.accessenvironment.ene.gov.on.ca/instruments/4505-6EHQZ7-14.pdf'

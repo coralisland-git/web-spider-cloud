@@ -54,7 +54,7 @@ class ChainxyPipeline(object):
         self.file.main_table_headers = ['log_number', 'log_number_link', 'fac_id', 'site_name', 'address', 'city', 'zip_code', 'county',
                         'summary_information', 'site_name_', 'received_data', 'address_1', 'address_2', 'status', 'tank_type', 'county',
                         'file_status', 'site_type', 'ust_facility_id', 'project_manager', 'cause_of_release', 'source_of_release', 'discovery_method',
-                        'media_efected', 'contaminants_released', 'delineate_soil', 'ground_water', 'soil_delineated_release', 'stopped_date',
+                        'media_effected', 'contaminants_released', 'delineate_soil', 'ground_water', 'soil_delineated_release', 'stopped_date',
                         'cleanup_start_date', 'cleanup_end_date'
                         ]
 

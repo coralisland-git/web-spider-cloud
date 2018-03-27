@@ -29,6 +29,10 @@ class lust_or(scrapy.Spider):
 
 	history = []
 
+	total_count = 0
+
+	count = 0
+
 	header = {
 
 		"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -117,6 +121,7 @@ class lust_or(scrapy.Spider):
 			item['county'] = self.validate(''.join(loc.xpath('.//td[7]//text()').extract()))
 
 			yield scrapy.Request(url, callback=self.parse_detail, meta={'item' : item})
+			
 
 	def parse_detail(self, response):
 
