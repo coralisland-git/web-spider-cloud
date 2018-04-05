@@ -66,175 +66,199 @@ class ww_in(scrapy.Spider):
 
 		self.driver.get("https://secure.in.gov/apps/dnr/dowos/WaterWell.aspx")
 
-		self.driver.find_element_by_id('mstr_cphUserItems_txtMaxNumRows').send_keys('300000')
-
 		self.driver.find_element_by_id('mstr_cphUserItems_ddlQSearch').send_keys('County')
-
-		self.driver.find_element_by_id('mstr_cphUserItems_btnSearchGo').click()
-
-		time.sleep(5)
 
 		source = self.driver.page_source.encode("utf8")
 
 		tree = etree.HTML(source)
 
-		count = len(tree.xpath('//table//tr//a'))
+		county_list = tree.xpath('//select[@id="mstr_cphUserItems_ddlQCounty"]//option//text()')
 
-		for ind in range(0, count):
+		time.sleep(1)
 
-			self.driver.find_elements_by_xpath('//table//tr//a')[ind].click()
+		for county in county_list:
 
-			time.sleep(6)
+			try:
 
-			source = self.driver.page_source.encode("utf8")
+				self.driver.find_element_by_id('mstr_cphUserItems_txtMaxNumRows').send_keys('300000')
 
-			tree = etree.HTML(source)
-			
-			item = ChainItem()
+				self.driver.find_element_by_id('mstr_cphUserItems_ddlQSearch').send_keys('County')			
 
-			item['owner_contractor'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnType"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="Label89"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="Label90"]//text()')))
-			
-			item['name'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnName"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillName"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblOperName"]//text()')))
-			
-			item['address'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnAddr"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillAddr"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblOperLic"]//text()')))
-			
-			item['telephone'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnPhone"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillPhone"]//text()'))) + '-' + ' '
+				self.driver.find_element_by_id('mstr_cphUserItems_ddlQCounty').send_keys(county)
 
-			item['reference_number'] = self.validate(''.join(tree.xpath('//span[@id="lblRefNum"]//text()')))
+				self.driver.find_element_by_id('mstr_cphUserItems_btnSearchGo').click()
 
-			item['driving_dircetion_to_well'] = self.validate(''.join(tree.xpath('//span[@id="lblDriving"]//text()')))
+				time.sleep(15)
 
-			item['date_completed'] = self.validate(''.join(tree.xpath('//span[@id="lblDateCompleted"]//text()')))
+				source = self.driver.page_source.encode("utf8")
 
-			item['well_use'] = self.validate(''.join(tree.xpath('//span[@id="lblWellUse"]//text()')))
+				tree = etree.HTML(source)
 
-			item['drilling_method'] = self.validate(''.join(tree.xpath('//span[@id="lblWellDrillMethod"]//text()')))
+				count = len(tree.xpath('//table//tr//a'))
 
-			item['pump_type'] = self.validate(''.join(tree.xpath('//span[@id="lblWellPumpType"]//text()')))
+				for ind in range(0, count):
 
-			item['depth'] = self.validate(''.join(tree.xpath('//span[@id="lblWellDepth"]//text()')))
+					try:
 
-			item['pump_setting_depth'] = self.validate(''.join(tree.xpath('//span[@id="lblWellPumpDepth"]//text()')))
+						self.driver.find_elements_by_xpath('//table//tr//a')[ind].click()
 
-			item['water_quality'] = self.validate(''.join(tree.xpath('//span[@id="lblWellQuality"]//text()')))
+						time.sleep(6)
 
-			item['casing_length'] = self.validate(''.join(tree.xpath('//span[@id="lblCasingLength"]//text()')))
+						source = self.driver.page_source.encode("utf8")
 
-			item['casing_mateiral'] = self.validate(''.join(tree.xpath('//span[@id="lblCasingMaterial"]//text()')))
+						tree = etree.HTML(source)
+						
+						item = ChainItem()
 
-			item['casing_diameter'] = self.validate(''.join(tree.xpath('//span[@id="lblCasingDia"]//text()')))
+						item['owner_contractor'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnType"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="Label89"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="Label90"]//text()')))
+						
+						item['name'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnName"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillName"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblOperName"]//text()')))
+						
+						item['address'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnAddr"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillAddr"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblOperLic"]//text()')))
+						
+						item['telephone'] = self.validate(''.join(tree.xpath('//span[@id="lblOwnPhone"]//text()'))) + '-' + self.validate(''.join(tree.xpath('//span[@id="lblDrillPhone"]//text()'))) + '-' + ' '
 
-			item['screen_length'] = self.validate(''.join(tree.xpath('//span[@id="lblScreenLength"]//text()')))
+						item['reference_number'] = self.validate(''.join(tree.xpath('//span[@id="lblRefNum"]//text()')))
 
-			item['screen_material'] = self.validate(''.join(tree.xpath('//span[@id="lblScreenMaterial"]//text()')))
+						item['driving_dircetion_to_well'] = self.validate(''.join(tree.xpath('//span[@id="lblDriving"]//text()')))
 
-			item['screen_diameter'] = self.validate(''.join(tree.xpath('//span[@id="lblScreenDia"]//text()')))
+						item['date_completed'] = self.validate(''.join(tree.xpath('//span[@id="lblDateCompleted"]//text()')))
 
-			item['slot_size']  = self.validate(''.join(tree.xpath('//span[@id="lblScreenSlot"]//text()')))
+						item['well_use'] = self.validate(''.join(tree.xpath('//span[@id="lblWellUse"]//text()')))
 
-			item['type_of_test'] = self.validate(''.join(tree.xpath('//span[@id="lblTypeTest"]//text()')))
+						item['drilling_method'] = self.validate(''.join(tree.xpath('//span[@id="lblWellDrillMethod"]//text()')))
 
-			item['test_rate'] = self.validate(''.join(tree.xpath('//span[@id="lblTestRate"]//text()')))
+						item['pump_type'] = self.validate(''.join(tree.xpath('//span[@id="lblWellPumpType"]//text()')))
 
-			item['bail_test_rate'] = self.validate(''.join(tree.xpath('//span[@id="lblBailTestRate"]//text()')))
+						item['depth'] = self.validate(''.join(tree.xpath('//span[@id="lblWellDepth"]//text()')))
 
-			item['drawdown'] = self.validate(''.join(tree.xpath('//span[@id="lblDrawdown"]//text()')))
+						item['pump_setting_depth'] = self.validate(''.join(tree.xpath('//span[@id="lblWellPumpDepth"]//text()')))
 
-			item['static_water_level'] = self.validate(''.join(tree.xpath('//span[@id="lblStaticLevel"]//text()')))
+						item['water_quality'] = self.validate(''.join(tree.xpath('//span[@id="lblWellQuality"]//text()')))
 
-			item['bailer_drawdown'] = self.validate(''.join(tree.xpath('//span[@id="lblBailerDrawdown"]//text()')))
+						item['casing_length'] = self.validate(''.join(tree.xpath('//span[@id="lblCasingLength"]//text()')))
 
-			item['material'] = self.validate(''.join(tree.xpath('//span[@id="lblGroutMaterial"]//text()')))
+						item['casing_mateiral'] = self.validate(''.join(tree.xpath('//span[@id="lblCasingMaterial"]//text()')))
 
-			item['depth_2'] = self.validate(''.join(tree.xpath('//span[@id="lblSealDepth"]//text()')))
+						item['casing_diameter'] = self.validate(''.join(tree.xpath('//span[@id="lblCasingDia"]//text()')))
 
-			item['installation_method'] = self.validate(''.join(tree.xpath('//span[@id="lblSealMethod"]//text()')))
+						item['screen_length'] = self.validate(''.join(tree.xpath('//span[@id="lblScreenLength"]//text()')))
 
-			item['number_of_bags_used'] = self.validate(''.join(tree.xpath('//span[@id="lblGroutBags"]//text()')))
+						item['screen_material'] = self.validate(''.join(tree.xpath('//span[@id="lblScreenMaterial"]//text()')))
 
-			item['sealing_material'] = self.validate(''.join(tree.xpath('//span[@id="lblSealMaterial"]//text()')))
+						item['screen_diameter'] = self.validate(''.join(tree.xpath('//span[@id="lblScreenDia"]//text()')))
 
-			item['well_abandonment_depth'] = self.validate(''.join(tree.xpath('//span[@id="lblSealDepth"]//text()')))
+						item['slot_size']  = self.validate(''.join(tree.xpath('//span[@id="lblScreenSlot"]//text()')))
 
-			item['installation_method_2'] = self.validate(''.join(tree.xpath('//span[@id="lblSealMethod"]//text()')))
+						item['type_of_test'] = self.validate(''.join(tree.xpath('//span[@id="lblTypeTest"]//text()')))
 
-			item['number_of_bags_used_2'] = self.validate(''.join(tree.xpath('//span[@id="lblSealBags"]//text()')))
+						item['test_rate'] = self.validate(''.join(tree.xpath('//span[@id="lblTestRate"]//text()')))
 
-			item['county'] = self.validate(''.join(tree.xpath('//span[@id="lblCounty"]//text()')))
+						item['bail_test_rate'] = self.validate(''.join(tree.xpath('//span[@id="lblBailTestRate"]//text()')))
 
-			item['township'] = self.validate(''.join(tree.xpath('//span[@id="lblTownship"]//text()')))
+						item['drawdown'] = self.validate(''.join(tree.xpath('//span[@id="lblDrawdown"]//text()')))
 
-			item['range'] = self.validate(''.join(tree.xpath('//span[@id="lblRange"]//text()')))
+						item['static_water_level'] = self.validate(''.join(tree.xpath('//span[@id="lblStaticLevel"]//text()')))
 
-			item['section'] = self.validate(''.join(tree.xpath('//span[@id="lblSection"]//text()')))
+						item['bailer_drawdown'] = self.validate(''.join(tree.xpath('//span[@id="lblBailerDrawdown"]//text()')))
 
-			item['topo_map'] = self.validate(''.join(tree.xpath('//span[@id="lblTopoMap"]//text()')))
+						item['material'] = self.validate(''.join(tree.xpath('//span[@id="lblGroutMaterial"]//text()')))
 
-			item['grant'] = self.validate(''.join(tree.xpath('//span[@id="lblGrant"]//text()')))
+						item['depth_2'] = self.validate(''.join(tree.xpath('//span[@id="lblSealDepth"]//text()')))
 
-			item['field_located_by'] = self.validate(''.join(tree.xpath('//span[@id="lblFieldBy"]//text()')))
+						item['installation_method'] = self.validate(''.join(tree.xpath('//span[@id="lblSealMethod"]//text()')))
 
-			item['field_located_on'] = self.validate(''.join(tree.xpath('//span[@id="lblFieldOn"]//text()')))
+						item['number_of_bags_used'] = self.validate(''.join(tree.xpath('//span[@id="lblGroutBags"]//text()')))
 
-			item['courthouse_location_by'] = self.validate(''.join(tree.xpath('//span[@id="lblCourthouseBy"]//text()')))
+						item['sealing_material'] = self.validate(''.join(tree.xpath('//span[@id="lblSealMaterial"]//text()')))
 
-			item['courthouse_location_on'] = self.validate(''.join(tree.xpath('//span[@id="lblCourthouseOn"]//text()')))
+						item['well_abandonment_depth'] = self.validate(''.join(tree.xpath('//span[@id="lblSealDepth"]//text()')))
 
-			item['location_accepted_verification_by'] = self.validate(''.join(tree.xpath('//span[@id="lblVerificationBy"]//text()')))
+						item['installation_method_2'] = self.validate(''.join(tree.xpath('//span[@id="lblSealMethod"]//text()')))
 
-			item['location_accepted_verification_on'] = self.validate(''.join(tree.xpath('//span[@id="lblVerificationOn"]//text()')))
+						item['number_of_bags_used_2'] = self.validate(''.join(tree.xpath('//span[@id="lblSealBags"]//text()')))
 
-			item['subdivision_name'] = self.validate(''.join(tree.xpath('//span[@id="lblSubdivision"]//text()')))
+						item['county'] = self.validate(''.join(tree.xpath('//span[@id="lblCounty"]//text()')))
 
-			item['lot_number'] = self.validate(''.join(tree.xpath('//span[@id="lblLotNum"]//text()')))
+						item['township'] = self.validate(''.join(tree.xpath('//span[@id="lblTownship"]//text()')))
 
-			item['ft_w_of_el'] = self.validate(''.join(tree.xpath('//span[@id="lblWofE"]//text()')))
+						item['range'] = self.validate(''.join(tree.xpath('//span[@id="lblRange"]//text()')))
 
-			item['ft_n_of_sl'] = self.validate(''.join(tree.xpath('//span[@id="lblNofS"]//text()')))
+						item['section'] = self.validate(''.join(tree.xpath('//span[@id="lblSection"]//text()')))
 
-			item['ft_e_of_wl'] = self.validate(''.join(tree.xpath('//span[@id="lblEofW"]//text()')))
+						item['topo_map'] = self.validate(''.join(tree.xpath('//span[@id="lblTopoMap"]//text()')))
 
-			item['ft_s_of_nl'] = self.validate(''.join(tree.xpath('//span[@id="lblSofN"]//text()')))
+						item['grant'] = self.validate(''.join(tree.xpath('//span[@id="lblGrant"]//text()')))
 
-			item['ground_elevation'] = self.validate(''.join(tree.xpath('//span[@id="lblGroundElev"]//text()')))
+						item['field_located_by'] = self.validate(''.join(tree.xpath('//span[@id="lblFieldBy"]//text()')))
 
-			item['depth_of_bedrock'] = self.validate(''.join(tree.xpath('//span[@id="lblBedrockDepth"]//text()')))
+						item['field_located_on'] = self.validate(''.join(tree.xpath('//span[@id="lblFieldOn"]//text()')))
 
-			item['bedrock_elevation'] = self.validate(''.join(tree.xpath('//span[@id="lblBedrockElev"]//text()')))
+						item['courthouse_location_by'] = self.validate(''.join(tree.xpath('//span[@id="lblCourthouseBy"]//text()')))
 
-			item['aquifer_elevation'] = self.validate(''.join(tree.xpath('//span[@id="lblAquiferElev"]//text()')))
+						item['courthouse_location_on'] = self.validate(''.join(tree.xpath('//span[@id="lblCourthouseOn"]//text()')))
 
-			item['utm_easting'] = self.validate(''.join(tree.xpath('//span[@id="lblUTMEast"]//text()')))
+						item['location_accepted_verification_by'] = self.validate(''.join(tree.xpath('//span[@id="lblVerificationBy"]//text()')))
 
-			item['utm_northing'] = self.validate(''.join(tree.xpath('//span[@id="lblUTMNorth"]//text()')))
+						item['location_accepted_verification_on'] = self.validate(''.join(tree.xpath('//span[@id="lblVerificationOn"]//text()')))
 
-			well_log_table = tree.xpath('//table[@rules="all"]//tr')[1:]
+						item['subdivision_name'] = self.validate(''.join(tree.xpath('//span[@id="lblSubdivision"]//text()')))
 
-			top = ''
+						item['lot_number'] = self.validate(''.join(tree.xpath('//span[@id="lblLotNum"]//text()')))
 
-			bottom = ''
+						item['ft_w_of_el'] = self.validate(''.join(tree.xpath('//span[@id="lblWofE"]//text()')))
 
-			formation = ''
+						item['ft_n_of_sl'] = self.validate(''.join(tree.xpath('//span[@id="lblNofS"]//text()')))
 
-			for well_log in well_log_table:
+						item['ft_e_of_wl'] = self.validate(''.join(tree.xpath('//span[@id="lblEofW"]//text()')))
 
-				top += self.validate(''.join(well_log.xpath('.//td[1]/text()'))) + '-'
+						item['ft_s_of_nl'] = self.validate(''.join(tree.xpath('//span[@id="lblSofN"]//text()')))
 
-				bottom += self.validate(''.join(well_log.xpath('.//td[2]/text()'))) + '-'
+						item['ground_elevation'] = self.validate(''.join(tree.xpath('//span[@id="lblGroundElev"]//text()')))
 
-				formation += self.validate(''.join(well_log.xpath('.//td[3]/text()'))) + '-'
+						item['depth_of_bedrock'] = self.validate(''.join(tree.xpath('//span[@id="lblBedrockDepth"]//text()')))
 
-			item['top'] = top[:-1]
+						item['bedrock_elevation'] = self.validate(''.join(tree.xpath('//span[@id="lblBedrockElev"]//text()')))
 
-			item['bottom'] = bottom[:-1]
+						item['aquifer_elevation'] = self.validate(''.join(tree.xpath('//span[@id="lblAquiferElev"]//text()')))
 
-			item['formation'] = formation[:-1]
+						item['utm_easting'] = self.validate(''.join(tree.xpath('//span[@id="lblUTMEast"]//text()')))
 
-			yield item
-			
-			self.driver.find_element_by_id('btnBack').click()
+						item['utm_northing'] = self.validate(''.join(tree.xpath('//span[@id="lblUTMNorth"]//text()')))
 
-			time.sleep(1)
+						well_log_table = tree.xpath('//table[@rules="all"]//tr')[1:]
+
+						top = ''
+
+						bottom = ''
+
+						formation = ''
+
+						for well_log in well_log_table:
+
+							top += self.validate(''.join(well_log.xpath('.//td[1]/text()'))) + '-'
+
+							bottom += self.validate(''.join(well_log.xpath('.//td[2]/text()'))) + '-'
+
+							formation += self.validate(''.join(well_log.xpath('.//td[3]/text()'))) + '-'
+
+						item['top'] = top[:-1]
+
+						item['bottom'] = bottom[:-1]
+
+						item['formation'] = formation[:-1]
+
+						yield item
+						
+						self.driver.find_element_by_id('btnBack').click()
+
+						time.sleep(1)
+						
+					except:
+						pass
+				
+			except : 
+				pass
 
 	# validate value for eliminate space, wordwrap, etc 
 

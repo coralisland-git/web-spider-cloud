@@ -75,7 +75,7 @@ class ww_ar(scrapy.Spider):
 
 		country_list = response.xpath('//select[@name="county_cd"]//option/@value').extract()
 
-		for country in country_list[1:]:
+		for country in country_list[1:2]:
 
 			url = "https://wise.er.usgs.gov/driller_db/match.php"
 
@@ -96,7 +96,7 @@ class ww_ar(scrapy.Spider):
 
 		loc_list = response.xpath('//table/tr')
 
-		for loc in loc_list[1:]:
+		for loc in loc_list[1:100]:
 
 			item = ChainItem()
 
@@ -136,19 +136,26 @@ class ww_ar(scrapy.Spider):
 
 		driller_data = self.eliminate_space(detail[1].xpath('.//text()').extract())
 
-		if len(driller_data) > 2:
-
+		try:
 			item['driller_name'] = driller_data[2]
+		except:
+			pass
 
+		try:
 			item['driller_number'] = driller_data[1]
+		except:
+			pass
 
 		pump_data = self.eliminate_space(detail[2].xpath('.//text()').extract())
 
-		if len(pump_data) > 2:
-
+		try:
 			item['pump_installer_name'] = pump_data[2]
-
+		except:
+			pass
+		try:
 			item['pump_installer_number'] = pump_data[1]
+		except:
+			pass
 
 		try:
 			item['country'] = self.eliminate_space(detail[3].xpath('.//text()').extract())[1]

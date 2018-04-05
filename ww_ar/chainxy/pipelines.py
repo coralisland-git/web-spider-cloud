@@ -51,7 +51,7 @@ class ChainxyPipeline(object):
 
         for index, header in enumerate(self.file.main_table_headers):
 
-            self.file.main_table.write(0, index, header)
+            self.file.main_table.write(0, index, self.capitalize(header))
             
 
         self.file.table_a = workbook.add_worksheet('Table A')
@@ -60,7 +60,7 @@ class ChainxyPipeline(object):
 
         for index, header in enumerate(self.file.table_a_headers):
 
-            self.file.table_a.write(0, index, header)
+            self.file.table_a.write(0, index, self.capitalize(header))
 
 
     def spider_closed(self, spider):
@@ -83,3 +83,10 @@ class ChainxyPipeline(object):
         self.count += 1
 
         return item
+
+    def capitalize(self, item):
+        try:
+            item = item.replace('_', ' ').title()
+            return item
+        except:
+            pass

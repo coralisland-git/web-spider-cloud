@@ -255,11 +255,11 @@ class ebr_on(scrapy.Spider):
 		detail = response.xpath('//div[@aria-labelledby="h1_notice"]//span[@class="notice-content-sub"]')
 
 		try:
-			item['instrument_type'] = self.validate(''.join(detail[1].xpath('.//text()').extract()))
+			item['instrument_type'] = self.validate(' '.join(detail[1].xpath('.//text()').extract()))
 
-			item['company_name'] = self.validate(''.join(detail[0].xpath('.//text()').extract()[0:1]))
+			item['company_name'] = self.validate(' '.join(detail[0].xpath('.//text()').extract()[0:1]))
 
-			item['proposal_address'] = self.validate(''.join(detail[0].xpath('.//text()').extract()[1:]))
+			item['proposal_address'] = self.validate(' '.join(detail[0].xpath('.//text()').extract()[1:]))
 
 		except:
 
@@ -273,7 +273,7 @@ class ebr_on(scrapy.Spider):
 
 				item['proposal_date'] = ebrs[ind+1]
 
-		item['related_locations'] = self.validate(''.join(response.xpath('//div[contains(@aria-label, "Location(s) Related to")]//div[@class="notice-content"]//text()').extract()))
+		item['related_locations'] = self.validate(' '.join(response.xpath('//div[contains(@aria-label, "Location(s) Related to")]//div[@class="notice-content"]//text()').extract()))
 		
 		yield item
 
@@ -283,7 +283,7 @@ class ebr_on(scrapy.Spider):
 
 		try:
 
-			return item.strip().replace('\n', '').replace('\t','').replace('\r', '').replace('  ', '')
+			return item.replace('\n', '').replace('\t','').replace('\r', '').replace('  ',' ').strip()
 
 		except:
 

@@ -57,7 +57,7 @@ class ChainxyPipeline(object):
 
         for index, header in enumerate(self.file.well_details_sheet_headers):
 
-            self.file.well_details_sheet.write(0, index, header)
+            self.file.well_details_sheet.write(0, index, self.capitalize(header))
 
         self.file.owner_contractor_sheet = workbook.add_worksheet('Owner Contractor')
 
@@ -65,7 +65,7 @@ class ChainxyPipeline(object):
 
         for index, header in enumerate(self.file.owner_contractor_sheet_headers):
 
-            self.file.owner_contractor_sheet.write(0, index, header)
+            self.file.owner_contractor_sheet.write(0, index, self.capitalize(header))
 
         self.file.well_log_sheet = workbook.add_worksheet('Well Log')
 
@@ -73,7 +73,7 @@ class ChainxyPipeline(object):
 
         for index, header in enumerate(self.file.well_log_sheet_headers):
 
-            self.file.well_log_sheet.write(0, index, header)
+            self.file.well_log_sheet.write(0, index, self.capitalize(header))
 
     def spider_closed(self, spider):
 
@@ -131,3 +131,10 @@ class ChainxyPipeline(object):
         self.count_owner_contractor += owner_contractor_num
 
         return item
+
+    def capitalize(self, item):
+        try:
+            item = item.replace('_', ' ').title()
+            return item
+        except:
+            pass
