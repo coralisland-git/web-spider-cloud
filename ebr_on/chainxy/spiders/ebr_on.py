@@ -273,7 +273,7 @@ class ebr_on(scrapy.Spider):
 
 				item['proposal_date'] = ebrs[ind+1]
 
-		item['related_locations'] = self.validate(' '.join(response.xpath('//div[contains(@aria-label, "Location(s) Related to")]//div[@class="notice-content"]//text()').extract()))
+		item['related_locations'] = ' '.join(self.eliminate_space(self.validate(' '.join(response.xpath('//div[contains(@aria-label, "Location(s) Related to")]//div[@class="notice-content"]//text()').extract())).split('  ')))
 		
 		yield item
 

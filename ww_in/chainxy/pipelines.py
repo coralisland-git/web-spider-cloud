@@ -123,7 +123,6 @@ class ChainxyPipeline(object):
 
                     local_count += 1
 
-
         self.count += 1
 
         self.count_well_log += well_log_num

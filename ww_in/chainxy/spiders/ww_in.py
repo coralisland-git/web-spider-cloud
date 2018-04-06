@@ -80,7 +80,9 @@ class ww_in(scrapy.Spider):
 
 			try:
 
-				self.driver.find_element_by_id('mstr_cphUserItems_txtMaxNumRows').send_keys('300000')
+				self.driver.find_element_by_id('mstr_cphUserItems_txtMaxNumRows').clear()
+
+				self.driver.find_element_by_id('mstr_cphUserItems_txtMaxNumRows').send_keys('30000')
 
 				self.driver.find_element_by_id('mstr_cphUserItems_ddlQSearch').send_keys('County')			
 
