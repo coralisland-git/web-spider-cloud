@@ -15,6 +15,14 @@ class ChainItem(Item):
 
     Owner = Field()
 
+    Owner_Addr = Field()
+
+    Owner_City = Field()
+
+    Owner_State = Field()
+
+    Owner_Zip = Field()
+
     Site_Addr = Field()
 
     Site_City = Field()
@@ -31,4 +39,10 @@ class ChainItem(Item):
 
     Zestimate = Field()
 
-    Mark = Field()
+    Active = Field()
+
+    Icomps = Field()
+
+    Redfin = Field()
+
+    Trulia = Field()
